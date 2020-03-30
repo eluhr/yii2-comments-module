@@ -1,0 +1,22 @@
+{{ use("yii/widgets/ActiveForm") }}
+
+<div class="comment-list">
+    {% for comment in comments %}
+        {% set depth = 0 %}
+        {{ this.render("_comment.twig", {"model": comment, "depth" : depth, "maxDepth": maxDepth, "moduleId": moduleId, "editorRoleName": editorRoleName}) | raw }}
+    {% endfor %}
+
+</div>
+<div class="comment-controls">
+    <div class="reply-to-comment hidden">
+        {{ Html.button(FA.icon(FA._TIMES) | raw, {"data-remove-reply": "true", "title": t("comment", "Remove"), "class": "btn btn-xs btn-danger"}) | raw }}
+        <blockquote></blockquote>
+    </div>
+    {% set form = active_form_begin({"action": {0: "/" ~ moduleId ~ "/modify/add"}}) %}
+    {{ form.field(model, "key").hiddenInput().label(false) | raw }}
+    {{ form.field(model, "parent_comment_id").hiddenInput().label(false) | raw }}
+    {{ form.field(model, "name").label(model.getAttributeLabel("name") ~ " " ~ (Html.tag("span", "*", {"class": "text-danger"}) | raw)) | raw }}
+    {{ form.field(model, "message").textarea({"rows": 6}).label(model.getAttributeLabel("message") ~ " " ~ (Html.tag("span", "*", {"class": "text-danger"}) | raw)) | raw }}
+    {{ Html.submitButton(t("comment", "Comment"), {"class" : "btn btn-primary"}) | raw }}
+    {{ active_form_end() }}
+</div>

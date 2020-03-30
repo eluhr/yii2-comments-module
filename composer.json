@@ -1,0 +1,22 @@
+{
+    "name": "dmstr/yii2-comments-module",
+    "description": "Comments module for Yii 2 Framework",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "authors": [
+        {
+            "name": "Elias Luhr",
+            "email": "e.luhr@herzogkommunikation.de"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "yiisoft/yii2": "2.*",
+        "yiisoft/yii2-twig": "^2.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "dmstr\\comments\\": "src"
+        }
+    }
+}
