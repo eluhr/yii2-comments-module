@@ -9,8 +9,8 @@
 
 namespace dmstr\comments\assets;
 
+use rmrevin\yii\fontawesome\AssetBundle as FontAwesomeAsset;
 use yii\web\AssetBundle;
-use yii\web\JqueryAsset;
 use yii\web\YiiAsset;
 
 class CommentAssetBundle extends AssetBundle
@@ -22,8 +22,7 @@ class CommentAssetBundle extends AssetBundle
     ];
 
     public $depends = [
-        JqueryAsset::class,
-        \rmrevin\yii\fontawesome\AssetBundle::class,
+        FontAwesomeAsset::class,
         YiiAsset::class
     ];
 }

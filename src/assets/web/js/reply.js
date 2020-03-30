@@ -1,16 +1,18 @@
-var replyToCommentEl = $(".reply-to-comment");
-var replyToCommentQuote = replyToCommentEl.find("blockquote");
-var replyInput = $("#comment-parent_comment_id");
-$("[data-reply]").on("click" ,function(event) {
-    event.preventDefault();
-    replyInput.val($(this).data("reply"));
-    replyToCommentEl.removeClass("hidden");
-    replyToCommentQuote.html($(this).data("message"));
+document.querySelectorAll("[data-remove-reply]").forEach(function (removeReplyButton) {
+    removeReplyButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        this.parentNode.classList.add("hidden");
+        document.querySelector("[data-reply-quote='" + this.dataset.removeReply + "']").innerHTML = "";
+        document.querySelector("[data-reply-parent-id='" + this.dataset.removeReply + "']").value = "";
+    })
 });
-$("[data-remove-reply]").on("click" ,function(event) {
-    event.preventDefault();
-    replyInput.val("");
-    replyToCommentEl.addClass("hidden");
-    replyToCommentQuote.html("");
 
+document.querySelectorAll("[data-reply]").forEach(function (replyButton) {
+    replyButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        document.querySelector("[data-widget-id='" + this.dataset.replyWidgetId + "']").classList.remove("hidden");
+        document.querySelector("[data-reply-quote='" + this.dataset.replyWidgetId + "']").innerHTML = document.querySelector(".message[data-model-id='" + this.dataset.reply + "'][data-reply-widget-id='" + this.dataset.replyWidgetId + "']").innerHTML;
+        document.querySelector("[data-reply-parent-id='" + this.dataset.replyWidgetId + "']").value = this.dataset.reply;
+        console.log(document.querySelector(".message[data-model-id='" + this.dataset.reply + "'][data-reply-widget-id='" + this.dataset.replyWidgetId + "']").innerHTML)
+    })
 });

@@ -7,19 +7,19 @@
         <b>{{ model.name }}</b>
         <small>{{ app.formatter.asRelativeTime(model.created_at) }}</small>
         {% if depth < maxDepth %}
-            {{ Html.button((FA.icon(FA._REPLY) | raw) ~ " " ~ t("comment", "Reply"), { "class": "btn btn-xs btn-default", "data-message": model.message, "data-reply": model.id}) | raw }}
+            {{ Html.button((FA.icon(FA._REPLY) | raw) ~ " " ~ t("comment", "Reply"), { "class": "btn btn-xs btn-default", "data-message": model.message, "data-reply": model.id, "data-reply-widget-id": widgetId}) | raw }}
             {% if app.user.can(editorRoleName) %}
-                {{ Html.a((FA.icon(FA._TRASH_O) | raw) ~ " " ~ t("comment", "Delete"), { 0: "/" ~ moduleId ~ "/modify/remove", "id": model.id}, {"class": "btn btn-xs btn-danger","data-method": "post", "data-confirm": t("comment", "Are you sure that you want to delete this comment?")}) | raw }}
+                {{ Html.a((FA.icon(FA._TRASH_O) | raw) ~ " " ~ t("comment", "Delete"), { 0: "/" ~ moduleId ~ "/modify/remove", "id": model.id}, {"class": "btn btn-xs btn-danger","data-method": "post", "data-confirm": t("comment", "Are you sure you want to delete this and all underlying comments?")}) | raw }}
             {% endif %}
         {% endif %}
     </div>
-    <div class="message">{{ model.message }}</div>
+    <div class="message" data-model-id="{{ model.id }}" data-reply-widget-id="{{ widgetId }}">{{ model.message }}</div>
     {% if comments %}
         {{ Html.button(t("comment", "{count,plural,=1{# Comment} other{# Comments}}", {"count": comments|length}), {"data-toggle": "collapse",  "data-target": "#comments-" ~ model.id, "class": "btn btn-link btn-sm"}) | raw }}
         <div class="collapse" id="{{ "comments-" ~ model.id }}">
             <div class="child-comments">
                 {% for comment in comments %}
-                    {{ this.render("_comment.twig", {"model": comment, "depth": depth, "maxDepth": maxDepth, "moduleId": moduleId, "editorRoleName": editorRoleName}) | raw }}
+                    {{ this.render("_comment.twig", {"model": comment, "depth": depth, "maxDepth": maxDepth, "moduleId": moduleId, "editorRoleName": editorRoleName, "widgetId" : widgetId}) | raw }}
                 {% endfor %}
             </div>
         </div>
