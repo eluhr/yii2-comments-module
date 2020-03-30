@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `stg_comment` (
+CREATE TABLE IF NOT EXISTS `comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `parent_comment_id` INT NULL,
   `key` VARCHAR(45) NOT NULL,

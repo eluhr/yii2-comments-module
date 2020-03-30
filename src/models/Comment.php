@@ -46,7 +46,7 @@ class Comment extends ActiveRecord
      */
     public static function tableName(): string
     {
-        return 'stg_comment';
+        return 'comment';
     }
 
 
