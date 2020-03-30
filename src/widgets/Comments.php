@@ -52,7 +52,8 @@ class Comments extends Widget
             ]),
             'maxDepth' => $this->maxDepth,
             'moduleId' => $this->moduleId,
-            'editorRoleName' => $module->editorRoleName
+            'editorRoleName' => $module->editorRoleName,
+            'isEntitledToComment' => $module->commentatorRoleName === false || \Yii::$app->user->can($module->commentatorRoleName)
         ]);
     }
 }

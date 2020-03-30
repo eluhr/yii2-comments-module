@@ -44,7 +44,18 @@ class ModifyController extends Controller
                     'allow' => true,
                     'matchCallback' => function () {
                         return \Yii::$app->user->can($this->module->editorRoleName);
-                    }
+                    },
+                    'actions' => ['remove']
+                ],
+                [
+                    'allow' => true,
+                    'matchCallback' => function () {
+                        if ($this->module->commentatorRoleName === false) {
+                            return true;
+                        }
+                        return \Yii::$app->user->can($this->module->commentatorRoleName);
+                    },
+                    'actions' => ['add']
                 ]
             ]
         ];

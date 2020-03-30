@@ -5,10 +5,11 @@
     <div class="comment-list">
         {% for comment in comments %}
             {% set depth = 0 %}
-            {{ this.render("_comment.twig", {"model": comment, "depth" : depth, "maxDepth": maxDepth, "moduleId": moduleId, "editorRoleName": editorRoleName, "widgetId": widgetId}) | raw }}
+            {{ this.render("_comment.twig", {"model": comment, "depth" : depth, "maxDepth": maxDepth, "moduleId": moduleId, "editorRoleName": editorRoleName, "widgetId": widgetId, "isEntitledToComment": isEntitledToComment}) | raw }}
         {% endfor %}
 
     </div>
+    {% if isEntitledToComment %}
     <div class="comment-controls">
         <div class="reply-to-comment hidden" data-widget-id="{{ widgetId }}">
             {{ Html.button(FA.icon(FA._TIMES) | raw, {"data-remove-reply": widgetId, "title": t("comment", "Remove"), "class": "btn btn-xs btn-danger"}) | raw }}
@@ -22,5 +23,7 @@
         {{ Html.submitButton(t("comment", "Comment"), {"class" : "btn btn-primary"}) | raw }}
         {{ active_form_end() }}
     </div>
-
+    {% else %}
+        <div class="comment-not-allowed">{{ t("comment", "Please login to add a comment") }}</div>
+    {% endif %}
 </div>
