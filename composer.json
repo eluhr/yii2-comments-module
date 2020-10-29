@@ -1,5 +1,5 @@
 {
-    "name": "dmstr/yii2-comments-module",
+    "name": "eluhr/yii2-comments-module",
     "description": "Comments module for Yii 2 Framework",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
